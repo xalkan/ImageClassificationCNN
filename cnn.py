@@ -22,3 +22,6 @@ classifier.add(Conv2D(32, (3, 3), input_shape = (64, 64, 3), activation = 'relu'
 
 # adding pooling layer
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
+
+# flattening the input image
+classifier.add(Flatten())
