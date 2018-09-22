@@ -10,7 +10,7 @@ from keras.layers import Dense
 # initialize the CNN
 classifier = Sequential()
 
-# adding convolution layer
+# adding convolutional layer
 # arg 1 - number of feature detectors = feature maps
 # arg 2 and 3 - row and col of feature detector
 # default border mode
@@ -20,3 +20,5 @@ classifier = Sequential()
 # input_shape = (256, 256, 3) for tensorflow backend
 classifier.add(Conv2D(32, (3, 3), input_shape = (64, 64, 3), activation = 'relu' ))
 
+# adding pooling layer
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
