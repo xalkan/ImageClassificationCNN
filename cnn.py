@@ -56,3 +56,27 @@ test_set = test_datagen.flow_from_directory('dataset/test_set', target_size=(64,
 
 classifier.fit_generator(training_set, steps_per_epoch=8000, epochs=1, validation_data=test_set, validation_steps=2000)
 
+# 3 - New predictions
+
+# converting test image from type image dimension 64x64x3 to type numpy array dimensions
+# 1x64x64x3 because that extra dimension is for batch_size because keras classifier prediction
+# function always expects the batch_size
+
+import numpy as np
+from keras.preprocessing import image
+
+test_image = image.load_img('dataset/single_prediction/cat_or_dog_1.jpg', target_size = (64, 64))
+test_image = image.img_to_array(test_image)
+test_image = np.expand_dims(test_image, axis = 0)
+
+# actual prediction
+prediction = classifier.predict(test_image)
+
+# see all the classes
+training_set.class_indices
+if prediction[0][0] == 1:
+    predicted_class = 'dog'
+else:
+    predicted_class = 'cat'
+
+print(predicted_class)
